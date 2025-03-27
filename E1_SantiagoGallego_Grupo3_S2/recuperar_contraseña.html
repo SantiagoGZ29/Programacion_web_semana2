@@ -66,22 +66,28 @@
 
         <!-- Cambiar contraseña -->
         <div class="container mt-5">
-            <h1 class="card-title">Recuperar tú contraseña</h1>
+            <h1 class="card-title">Cambiar contraseña</h1>
                 <div class="row justify-content-center">
                     <div class="col-6">
                         <div class="card">
                             <div class="card-body">
                                 
-                                <form id="contraseña" action="">
+                                <form id="contraseña-form" action="">
    
                                     <div class="mb-3">
-                                        <label for="usuario" class="form-label">Ingresa tu correo electrónico para buscar tu cuenta.</label>
-                                        <input type="text" class="form-control" id="CorreoE" placeholder="Correo electrónico">
-                                        <small class="text-danger" id="CorreoE-Error"></small>  
+                                        <label for="usuario" class="form-label">Ingresa tu nueva contraseña.</label>
+                                        <input type="text" class="form-control" id="contraseña" placeholder="nueva contraseña">
+                                        <small class="text-danger" id="contraseña-error"></small>  
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="usuario" class="form-label">Repetir tu contraseña.</label>
+                                        <input type="text" class="form-control" id="repetir_contraseña" placeholder="repetir contraseña">
+                                        <small class="text-danger" id="repetir_contraseña-error"></small>  
                                     </div>
                                            
                                     <div class="d-grid mb-3">
-                                        <button type="submit" class="btn btn-primary">Buscar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
                                     </div>
                                 </form>                               
                             </div>
@@ -92,28 +98,64 @@
         </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>   
+    
     <script>
-        document.getElementById("contraseña").addEventListener("submit", function(event){
-            event.preventDefault();
-            
-            let correoE = document.getElementById("CorreoE").value; // Obtener el valor del input
-            let correoEError = document.getElementById("CorreoE-Error"); // Referencia al mensaje de error
-            correoEError.innerHTML = ""; // Limpiar el mensaje de error al inicio
-    
-            // Validación del campo
-            if(correoE === ""){
-                correoEError.innerHTML = "El campo correo electrónico es obligatorio";
-            }
-            else if(!correoE.includes("@") || !correoE.includes(".")){
-                correoEError.innerHTML = "El correo electrónico no es válido";
-            }
-            else{
-              window.location.href = "recuperar_contraseña.html"; // Si no hay errores, enviar el formulario
+      document.getElementById('contraseña-form').addEventListener('submit', function(event) {
+          event.preventDefault();
+  
+          // Capturar valores de los inputs
+          let contraseña = document.getElementById('contraseña').value;
+          let repetir_contraseña = document.getElementById('repetir_contraseña').value;
+  
+          // Capturar los elementos de error
+          let contraseñaError = document.getElementById('contraseña-error');
+          let repetir_contraseñaError = document.getElementById('repetir_contraseña-error');
+  
+          // Limpiar mensajes de error antes de validar
+          contraseñaError.innerText = '';
+          repetir_contraseñaError.innerText = '';
+  
+          // Variable de control para saber si el formulario es válido
+          let valid = true;
+  
+          // 1. Validar campos vacíos primero
+          if (contraseña === '') {
+              contraseñaError.innerText = 'El campo no puede estar vacío';
+              valid = false;
+          }
+          if (repetir_contraseña === '') {
+              repetir_contraseñaError.innerText = 'El campo no puede estar vacío';
+              valid = false;
+          }
+  
+          // Si hay campos vacíos, detener la ejecución aquí
+          if (!valid) return;
+  
+          // 2. Validar seguridad de la contraseña
+          const regexContrasenna = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,18}$/;
+          if (!regexContrasenna.test(contraseña)) {
+              contraseñaError.innerText = 'La contraseña debe tener entre 8 y 18 caracteres, incluir al menos una mayúscula, una minúscula, un número y un carácter especial.';
+              valid = false;
+          }
+  
+          // Si la contraseña no es segura, detener la ejecución aquí
+          if (!valid) return;
+  
+          // 3. Validar que las contraseñas coincidan
+          if (contraseña !== repetir_contraseña) {
+              repetir_contraseñaError.innerText = 'Las contraseñas no coinciden';
+              valid = false;
+          }
+  
+          // Si todo está bien, permitir el envío del formulario
+          if (valid) {
+              alert('Contraseña cambiada correctamente');
+              this.submit();
+          }
+      });
+  </script>
+  
 
-            }
-        });
-    </script>
-    
     <footer>
         <div class="container mt-5">
             <div class="row">
