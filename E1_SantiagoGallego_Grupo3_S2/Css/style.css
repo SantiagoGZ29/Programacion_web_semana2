@@ -12,3 +12,7 @@ h1{
     padding: 20px;
 }
 
+.switch-lg {
+    transform: scale(1.5); 
+    cursor: pointer;
+}
