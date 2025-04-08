@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- cards -->
+<div class="container mt-5">
+    <h1 class="card-title">Ingresa tus datos</h1>
+
+   
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        
+                        <form id="formulario" action="">
+
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre">
+                                <small class="text-danger" id="nombre-error"></small>               
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="usuario" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="usuario">
+                                <small class="text-danger" id="usuario-error"></small>  
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo</label>
+                                <input type="email" class="form-control" id="correo">
+                                <small class="text-danger" id="correo-error"></small>  
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="contrasenna" class="form-label">Contraseña</label>
+                                <input type="text" class="form-control" id="contrasenna">
+                                <small class="text-danger" id="contrasenna-error"></small>  
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="contrasenna2" class="form-label">Repetir Contraseña</label>
+                                <input type="text" class="form-control" id="contrasenna2">
+                                <small class="text-danger" id="contrasenna2-error"></small> 
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="fecha" class="form-label">Fecha de nacimiento</label>
+                                <input type="date" class="form-control" id="fecha">
+                                <small class="text-danger" id="fecha-error"></small>  
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="direccion" class="form-label">Direccion de despacho</label>
+                                <input type="text" class="form-control" id="direccion">  
+                            </div>
+
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+
+                            <div class="d-grid mb-3">
+                                <button type="button" class="btn btn-secondary" id="limpiar">Limpiar</button>
+                            </div>
+
+                        </form>                               
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>   
+
+<script>
+    const form = document.getElementById('formulario');
+
+    const nombre = document.getElementById('nombre');
+    const usuario = document.getElementById('usuario');
+    const correo = document.getElementById('correo');
+    const contrasenna = document.getElementById('contrasenna');
+    const contrasenna2 = document.getElementById('contrasenna2');
+    const fecha = document.getElementById('fecha');
+    const direccion = document.getElementById('direccion');
+
+    const btnLimpiar = document.getElementById('limpiar');
+
+    // Función para limpiar el formulario
+    btnLimpiar.addEventListener('click', function() {
+        // Limpiar campos
+        nombre.value = '';
+        usuario.value = '';
+        correo.value = '';
+        contrasenna.value = '';
+        contrasenna2.value = '';
+        fecha.value = '';
+        direccion.value = '';
+
+        // Limpiar errores
+        document.getElementById('nombre-error').innerText = '';
+        document.getElementById('usuario-error').innerText = '';
+        document.getElementById('correo-error').innerText = '';
+        document.getElementById('contrasenna-error').innerText = '';
+        document.getElementById('contrasenna2-error').innerText = '';
+        document.getElementById('fecha-error').innerText = '';
+    });
+
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        document.getElementById('nombre-error').innerText = '';
+        document.getElementById('usuario-error').innerText = '';
+        document.getElementById('correo-error').innerText = '';
+        document.getElementById('contrasenna-error').innerText = '';
+        document.getElementById('contrasenna2-error').innerText = '';
+        document.getElementById('fecha-error').innerText = '';
+
+        if (nombre.value === '') {
+            document.getElementById('nombre-error').innerText = 'Ingrese su nombre';
+            return;
+        }
+
+        if (usuario.value === '') {
+            document.getElementById('usuario-error').innerText = 'Ingrese su usuario';
+            return;
+        }
+
+        if (correo.value === '') {
+            document.getElementById('correo-error').innerText = 'Ingrese su correo';
+            return;
+        }
+
+        if (contrasenna.value === '') {
+            document.getElementById('contrasenna-error').innerText = 'Ingrese su contraseña';
+            return;
+        }
+
+        const regexContrasenna = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,18}$/;
+        if (!regexContrasenna.test(contrasenna.value)) {
+            contrasennaError.innerText = 'La contraseña debe tener entre 8 y 18 caracteres, incluir al menos una mayúscula, una minúscula, un número y un carácter especial.';
+        }
+
+        if (contrasenna2.value === '') {
+            document.getElementById('contrasenna2-error').innerText = 'Ingrese su contraseña';
+            return;
+        }
+
+        if (contrasenna.value !== contrasenna2.value) {
+            document.getElementById('contrasenna2-error').innerText = 'Las contraseñas no coinciden';
+            return;
+        }
+
+        if (fecha.value === '') {
+            document.getElementById('fecha-error').innerText = 'Ingrese su fecha de nacimiento';
+            return;
+        }
+
+        // Validar edad mínima de 13 años
+        const fechaNacimiento = new Date(fecha.value);
+        const hoy = new Date();
+        const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        const mesDiferencia = hoy.getMonth() - fechaNacimiento.getMonth();
+        const diaDiferencia = hoy.getDate() - fechaNacimiento.getDate();
+
+        // Verificar si la persona tiene menos de 13 años
+        if (edad < 13 || (edad === 13 && mesDiferencia < 0) || (edad === 13 && mesDiferencia === 0 && diaDiferencia < 0)) {
+            document.getElementById('fecha-error').innerText = 'Debes tener al menos 13 años para registrarte';
+            return;
+        }
+
+        alert('Formulario enviado');
+        form.submit();
+
+        });
+
+
+</script>
+
+{% endblock %}

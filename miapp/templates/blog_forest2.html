@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Barra de búsqueda centrada en la parte superior -->
+<div class="container mt-4" style="max-width: 1320px;">
+    <form class="d-flex justify-content-center" role="search">
+        <input class="form-control me-2 w-50" type="search" placeholder="Buscar en el blog..." aria-label="Buscar">
+        <button class="btn btn-outline-success" type="submit" disabled>Buscar</button>
+    </form>
+</div>
+
+<!-- Contenedor de la imagen (tarjeta superior) -->
+<div class="container mt-3">
+    <div class="card mb-0 mx-auto" style="max-width: 1320px;">
+        <div class="row g-0">
+            <div class="col-12 position-relative">
+                <!-- La imagen ocupará el 100% del ancho de la tarjeta -->
+                <img src="{% static 'img/forest3.png' %}" class="img-fluid w-100" alt="Imagen" style="object-fit: cover; height: 50vh;">
+                
+                <div class="position-absolute bottom-0 start-0 p-3 text-white fw-bold">
+                    <h5>The Forest WIKI</h5>
+                    <p>Acá vas a encontrar todo lo que necesitas saber sobre tu juego favorito</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Contenedor del carrusel: mismo ancho que la tarjeta superior -->
+<div class="container mt-3">
+    <div class="card mb-0 mx-auto" style="max-width: 1320px;">
+        <div id="carouselCards" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+                <!-- Primer item del carrusel con 5 tarjetas -->
+                <div class="carousel-item active">
+                    <div class="d-flex justify-content-start">
+                        <!-- Tarjeta 1 -->
+                        <div class="card" style="width: 18rem; margin-right: 10px;">
+                            <img src="{% static 'img/animales.png' %}" class="card-img-top" alt="Imagen 1" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title small">Animales</h5>
+                                <p class="card-text small">"La fauna de The Forest es diversa, con animales que ofrecen recursos y 
+                                    otros que representan peligros. Los jugadores deben interactuar con ella para sobrevivir en el
+                                     entorno salvaje."</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta 2 -->
+                        <div class="card" style="width: 18rem; margin-right: 10px;">
+                            <img src="{% static 'img/mapa.jpg' %}" class="card-img-top" alt="Imagen 2" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title small">Mapa</h5>
+                                <p class="card-text small">"El mapa de The Forest es vasto y lleno de secretos. Desde cuevas oscuras hasta
+                                    playas soleadas, cada rincón ofrece oportunidades y desafíos únicos para los jugadores."</p>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 3 -->
+                        <div class="card" style="width: 18rem; margin-right: 10px;">
+                            <img src="{% static 'img/enemigos.png' %}" class="card-img-top" alt="Imagen 3" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title small">Enemigos</h5>
+                                <p class="card-text small">"Los enemigos en The Forest son variados y aterradores. Desde caníbales hasta criaturas
+                                    mutantes, cada encuentro pone a prueba la habilidad y estrategia del jugador."</p>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 4 -->
+                        <div class="card" style="width: 18rem; margin-right: 10px;">
+                            <img src="{% static 'img/construcciones.jpg' %}" class="card-img-top" alt="Imagen 4" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title small">Construcciones</h5>
+                                <p class="card-text small">"La construcción en The Forest es esencial para la supervivencia. Los jugadores pueden
+                                    crear refugios, trampas y estructuras defensivas para protegerse de los peligros del entorno."</p>
+                                
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 5 -->
+                        <div class="card" style="width: 18rem; margin-right: 10px;">
+                            <img src="{% static 'img/plantas.jpg' %}" class="card-img-top" alt="Imagen 5" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title small">Plantas</h5>
+                                <p class="card-text small">"Las plantas en The Forest son vitales para la supervivencia. Proporcionan recursos
+                                    como alimentos y medicinas, y su conocimiento es clave para prosperar en el entorno hostil."</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Segundo item del carrusel (tarjetas restantes) -->
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-start">
+                        <!-- Tarjeta 6 -->
+                        <div class="card" style="width: 18rem; margin-right: 10px;">
+                            <img src="{% static 'img/armas.jpg' %}" class="card-img-top" alt="Imagen 6" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title small">Armas</h5>
+                                <p class="card-text small">"Las armas en The Forest son esenciales para la defensa y la caza. Desde arcos
+                                    rudimentarios hasta armas de fuego, cada herramienta ofrece diferentes ventajas y estilos de juego."</p>
+                                
+                            </div>
+                        </div>
+                        <!-- Tarjeta 7 -->
+                        <div class="card" style="width: 18rem;">
+                            <img src="{% static 'img/Crafting.jpg' %}" class="card-img-top" alt="Imagen 7" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title small">Crafting</h5>
+                                <p class="card-text small">"El sistema de crafting en The Forest permite a los jugadores combinar recursos
+                                    para crear herramientas, armas y estructuras. La creatividad y la estrategia son clave para sobrevivir."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controles del carrusel -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCards" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselCards" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Descripción detallada del juego -->
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">The Forest: Un Mundo de Supervivencia, Misterio y Terror</h5>
+            <p class="card-text">The Forest es un juego de supervivencia en primera persona que combina una jugabilidad desafiante con elementos de terror psicológico. Desarrollado por Endnight Games, el juego ha cautivado a jugadores de todo el mundo con su atmósfera inquietante, su mundo abierto vasto y su historia profundamente envolvente. En este artículo, exploraremos a fondo todos los aspectos del juego: desde su jugabilidad, hasta su mapa, enemigos, armas y mucho más.</p>
+            <h5 class="card-title">Introducción al Juego</h5>
+            <p class="card-text">The Forest se lanza en Early Access en 2014 y ha sido una montaña rusa de actualizaciones y mejoras, manteniendo su popularidad debido a su enfoque único en la supervivencia. El juego comienza con el protagonista, un hombre llamado Eric Leblanc, quien sobrevive a un accidente aéreo y se encuentra en una isla deshabitada, rodeado de un mundo selvático y peligroso. A medida que exploras la isla, pronto descubres que no estás solo. La isla está habitada por una tribu de caníbales mutantes y criaturas extrañas que pondrán a prueba tu habilidad para sobrevivir.</p>
+            <h5 class="card-title">Mecánicas de Supervivencia</h5>
+            <p class="card-text">La jugabilidad de The Forest se centra en la supervivencia. Los jugadores deben recolectar recursos, construir refugios, cazar animales y defenderse de los enemigos. La mecánica de crafting es fundamental, permitiendo a los jugadores combinar materiales para crear herramientas, armas y estructuras defensivas. La gestión de la salud, el hambre y la sed es crucial para sobrevivir en este entorno hostil.</p>
+            <h5 class="card-title">El Mapa y la Exploración</h5>
+            <p class="card-text">El mapa de The Forest es vasto y diverso, con diferentes biomas que ofrecen una variedad de recursos y desafíos. Desde densos bosques hasta cuevas oscuras, cada área tiene su propio conjunto de enemigos y secretos por descubrir. La exploración es una parte esencial del juego, ya que los jugadores pueden encontrar objetos útiles, planos de construcción y pistas sobre la historia del juego.</p>
+            <h5 class="card-title">Los enemigos</h5>
+            <p class="card-text">Uno de los aspectos más aterradores de The Forest es la variedad de enemigos a los que te enfrentas. Desde los caníbales hasta los mutantes más grotescos, la isla está llena de criaturas que harán todo lo posible para cazarte y destruirte.</p>
+            <h5 class="card-title">Las Armas</h5>
+            <p class="card-text">El juego ofrece una amplia gama de armas, desde arcos y flechas hasta armas de fuego. Cada arma tiene sus propias ventajas y desventajas, y los jugadores deben elegir sabiamente qué usar en cada situación. La personalización de las armas también es posible, lo que permite a los jugadores adaptarlas a su estilo de juego.</p>
+            <h5 class="card-title">El Crafting</h5>
+            <p class="card-text">El sistema de crafting en The Forest es profundo y variado. Los jugadores pueden combinar diferentes materiales para crear herramientas, armas y estructuras defensivas. La creatividad y la estrategia son clave para sobrevivir en este entorno hostil.</p>
+            <h5 class="card-title">Conclusión</h5>
+            <p class="card-text">The Forest es un juego que combina supervivencia, exploración y terror de una manera única. Con su mundo abierto, mecánicas de juego profundas y atmósfera inquietante, ha logrado capturar la atención de jugadores de todo el mundo. Ya sea que estés buscando construir un refugio seguro o enfrentarte a los horrores de la isla, The Forest ofrece una experiencia de juego inolvidable.</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

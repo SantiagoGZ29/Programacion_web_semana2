@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid px-0">
+    <div id="carouselTarjeta" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="card border-0 rounded-0 text-center">
+            <a href="{% url 'categorias' %}"><img src="{% static 'img/juegos.jpg' %}" class="w-100" alt="Imagen 1" style="height: 400px; object-fit: cover;"></a>
+            <div class="card-body bg-light">
+              <h5 class="card-title fw-bold">CATEGORIAS</h5>
+              <p class="card-text text-start">
+                Descubre el universo de los videojuegos con nuestra selección de categorías. 
+                Desde épicas aventuras de mundo abierto hasta intensos juegos de acción, 
+                pasando por los mejores títulos de deportes, estrategia y RPG. Filtra por género, plataforma o popularidad y 
+                encuentra el juego perfecto para ti. No importa si eres un fanático de los clásicos o buscas lo más reciente en la industria, 
+                aquí hay algo para todos. ¡Explora ahora y lleva tu experiencia gamer al siguiente nivel!
+              </p>   
+            </div>
+          </div>
+        </div>
+  
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <div class="card border-0 rounded-0 text-center">
+            <a href="{% url 'blogs' %}"><img src="{% static 'img/bloggb.jpg' %}" class="w-100" alt="Imagen 2" style="height: 400px; object-fit: cover;"></a>
+            <div class="card-body bg-light">
+              <h5 class="card-title">BLOGS</h5>
+              <p class="card-text">
+                Sumérgete en nuestro blog y mantente al día con las últimas novedades del mundo gamer. 
+                Descubre análisis detallados, noticias frescas, lanzamientos imperdibles, curiosidades y
+                 recomendaciones sobre tus títulos favoritos. Ya seas un jugador casual o un fanático de corazón,
+                  aquí encontrarás contenido pensado para ti.
+              </p>
+            </div>
+          </div>
+        </div>
+    
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselTarjeta" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselTarjeta" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  
+  
+{% endblock %}
+
+

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<!-- Cards -->
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Aventura</h1>
+        </div>
+   
+        <div class="row justify-content-center">
+
+            <div class="col-12 col-sm-6 col-md-6">
+                <div class="card mb-4">
+                    <img src="{% static 'img/zelda.jpg' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">The Legend of Zelda: Tears of the Kingdom</h5>
+                        <p class="card-text">🗺️ Una aventura épica te espera: Explora un vasto mundo lleno de misterios, 
+                            enemigos y secretos por descubrir. Resuelve acertijos, combate criaturas míticas y completa misiones desafiantes mientras desentrañas la historia de Hyrule. ¡La aventura nunca termina!
+                        </p>
+                            <h5 class="card-text"> Precio: $54.990</h5> 
+                            <div class="d-flex justify-content-center">
+                              <a href="{% url 'carrito' %}" class="btn btn-warning">AÑADIR AL CARRITO</a>
+                            </div>         
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6">
+                <div class="card mb-4">
+                    <img src="{% static 'img/Uncharted.jpg' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title"> Uncharted 5: The Lost Legacy</h5>
+                        <p class="card-text">🌍 Aventura y acción sin límites: Acompaña a Nathan Drake en una nueva y emocionante travesía. Enfréntate a peligros, explora ruinas antiguas y 
+                            descubre tesoros perdidos mientras luchas por sobrevivir. La aventura está llena de giros inesperados y desafíos épicos.</h5>
+                            <h5 class="card-text"> Precio: $39.990</h5> 
+                            <div class="d-flex justify-content-center">
+                              <a href="{% url 'carrito' %}" class="btn btn-warning">AÑADIR AL CARRITO</a>
+                            </div>         
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>   
+
+{% endblock %}

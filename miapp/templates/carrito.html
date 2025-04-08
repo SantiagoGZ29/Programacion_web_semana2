@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Carrito de Compras 🛒</h2>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Producto 1 -->
+                    <div class="d-flex align-items-center border-bottom pb-3">
+                        <img src="{% static 'img/gtav.jpg' %}" class="img-fluid w-25 rounded" alt="Producto">
+                        <div class="ms-3 flex-grow-1">
+                            <h5 class="mb-1">GTA V</h5>
+                            <p class="mb-1 text-muted">Precio: $29.990</p>
+                            <input type="number" class="form-control w-25 d-inline" value="1" min="1">
+                        </div>
+                        <button class="btn btn-danger btn-sm">
+                            <img src="{% static 'img/eliminar.png' %}" alt="Cerrar" width="20">
+                        </button>
+                    </div>
+
+                    <!-- Producto 2 -->
+                        <div class="d-flex align-items-center border-bottom pb-3">
+                            <img src="{% static 'img/fifa.jpg' %}" class="img-fluid w-25 rounded" alt="Producto">
+                            <div class="ms-3 flex-grow-1">
+                                <h5 class="mb-1">FIFA 25</h5>
+                                <p class="mb-1 text-muted">Precio: $49.990</p>
+                                <input type="number" class="form-control w-25 d-inline" value="1" min="1">
+                            </div>
+                            <button class="btn btn-danger btn-sm">
+                                <img src="{% static 'img/eliminar.png' %}" alt="Cerrar" width="20">
+                            </button>
+                        </div>
+
+                    <!-- Total y botón de compra -->
+                    <div class="mt-4 d-flex justify-content-between">
+                        <h4>Total: <span id="total">$79.980</span></h4>
+                        <button class="btn btn-success">Finalizar compra</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>   
+
+{% endblock %}

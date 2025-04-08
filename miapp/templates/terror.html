@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+ <!-- Cards -->
+ <div class="container mt-5">
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Terror</h1>
+        </div>
+   
+        <div class="row justify-content-center">
+
+            <div class="col-12 col-sm-6 col-md-6">
+                <div class="card mb-4">
+                    <img src="{% static 'img/re4.jpg' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Resident Evil 4 Remake</h5>
+                        <p class="card-text">🧟 El horror clásico renace: Revive la aterradora misión de Leon S. Kennedy en un pueblo plagado de horrores.
+                             Con gráficos renovados, una jugabilidad mejorada y una atmósfera más intensa, prepárate para enfrentarte a los infectados y descubrir oscuros secretos.
+                            <h5 class="card-text"> Precio: $29.990</h5> 
+                            <div class="d-flex justify-content-center">
+                              <a href="{% url 'carrito' %}" class="btn btn-warning">AÑADIR AL CARRITO</a>
+                            </div>         
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6">
+                <div class="card mb-4">
+                    <img src="{% static 'img/protocol.jpg' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title"> The Callisto Protocol</h5>
+                        <p class="card-text">🚀 Terror en los confines del espacio: Sobrevive en una prisión infestada de criaturas mutantes en 
+                            una estación espacial abandonada. Con un ambiente claustrofóbico y combates brutales, cada paso puede ser el último. ¿Lograrás escapar de esta pesadilla?</h5>
+                            <h5 class="card-text"> Precio: $19.990</h5> 
+                            <div class="d-flex justify-content-center">
+                              <a href="{% url 'carrito' %}" class="btn btn-warning">AÑADIR AL CARRITO</a>
+                            </div>         
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>   
+    
+    
+{% endblock %}
