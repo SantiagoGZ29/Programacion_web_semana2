@@ -1,103 +1,117 @@
 {% extends "base.html" %}
 {% load static %}
+{% load widget_tweaks %}
+
+
 
 {% block content %}
+<!-- Inicio de sesión -->
+<div class="container mt-5">
 
- <!-- Inicio de sesion -->
- <div class="container mt-5">
-    <h1 class="card-title">Ingresa tus datos de inicio</h1>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
 
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        
-                        <form id="login" action="">
+                    <form id="login" method="POST" action="{% url 'login_usuario' %}">
+                        {% csrf_token %}
 
-                            <div class="mb-3">
-                                <label for="usuario" class="form-label">Usuario</label>
-                                <input type="text" class="form-control" id="usuario">
-                                <small class="text-danger" id="usuario-error"></small>  
-                            </div>   
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo</label>
+                            <input type="text" class="form-control" id="correo" name="correo">
+                            <small class="text-danger" id="correo-error"></small>
+                        </div>
 
-                            <div class="mb-3">
-                                <label for="contrasenna" class="form-label">Contraseña</label>
-                                <input type="text" class="form-control" id="contrasenna">
-                                <small class="text-danger" id="contrasenna-error"></small>  
-                            </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                            <small class="text-danger" id="contrasenna-error"></small>
+                        </div>
 
-                            <div class="mb-3">
-                                <a href="{% url 'contraseña' %}"><label type="submit" class="form label">¿Olvidaste tu contraseña?</label></a>
-                            </div>
+                        <!-- Checkbox para mostrar/ocultar contraseña -->
+                        <div class="mb-3">
+                            <input type="checkbox" id="show-password" class="form-check-input">
+                            <label for="show-password" class="form-check-label">Mostrar Contraseña</label>
+                        </div>
 
-                            <div class="d-grid mb-3">
-                                <button type="submit" class="btn btn-primary">Iniciar sesion</button>
-                            </div>
+                        <div class="mb-3">
+                            <a href="{% url 'contraseña' %}"><label class="form-label">¿Olvidaste tu contraseña?</label></a>
+                        </div>
 
-                            <div class="d-grid mb-3">
-                                <a href="{% url 'formulario' %}" class="btn btn-success">Registrarse</a>
-                            </div>
+                        <input type="hidden" name="next" value="{{ next }}">
 
-                            <div class="form-check form-switch mb-3 d-flex align-items-center">
-                              <input class="form-check-input switch-lg" type="checkbox" id="adminSwitch">
-                              <label class="form-check-label ms-3 fs-5" for="adminSwitch">Iniciar como administrador</label>
-                          </div>
-                          
-                        </form>                               
-                    </div>
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <a href="{% url 'formulario' %}" class="btn btn-success">Registrarse</a>
+                        </div>
+
+                    </form>
+
                 </div>
             </div>
         </div>
-        
+    </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>   
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 <script>
-document.getElementById('adminSwitch').addEventListener('change', function() {
-if (this.checked) {
-    window.location.href = "{% url 'adminlogin' %}";
-}
-});
-document.getElementById('login').addEventListener('submit', function(event){
-event.preventDefault();
 
-let usuario = document.getElementById('usuario').value;
-let contrasenna = document.getElementById('contrasenna').value;
+    // Si la URL tiene ?next=..., actualiza el input hidden
+    const params = new URLSearchParams(window.location.search);
+    const next = params.get('next');
+    if (next) {
+        document.querySelector('input[name="next"]').value = next;
+    }
 
-let usuarioError = document.getElementById('usuario-error');
-let contrasennaError = document.getElementById('contrasenna-error');
 
-usuarioError.innerText = '';
-contrasennaError.innerText = '';
 
-let valid = true; 
+    document.getElementById('login').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-// Validar usuario vacío
-if (usuario === '') {
-usuarioError.innerText = 'El campo usuario es obligatorio';
-valid = false;
-}
+        let correo = document.getElementById('correo').value.trim();
+        let password = document.getElementById('password').value.trim();
 
-// Validar contraseña vacía
-if (contrasenna === '') {
-contrasennaError.innerText = 'El campo contraseña es obligatorio';
-valid = false;
-}
+        let correoError = document.getElementById('correo-error');
+        let contrasennaError = document.getElementById('contrasenna-error');
 
-if (!valid) return;
+        correoError.innerText = '';
+        contrasennaError.innerText = '';
 
-// Validación de seguridad de la contraseña
-const regexContrasenna = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,18}$/;
-if (!regexContrasenna.test(contrasenna)) {
-contrasennaError.innerText = 'La contraseña debe tener entre 8 y 18 caracteres, incluir al menos una mayúscula, una minúscula, un número y un carácter especial.';
-return; // Detener ejecución si la contraseña no es segura
-}
+        let valid = true;
 
-// Si todo está correcto, redirigir
-window.location.href = "{% url 'perfil' %}";
-});
+        if (correo === '') {
+            correoError.innerText = 'El campo correo es obligatorio';
+            valid = false;
+        } else {
+            // Validar formato correo (opcional)
+            const correoPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!correoPattern.test(correo)) {
+                correoError.innerText = 'Por favor, ingresa un correo válido.';
+                valid = false;
+            }
+        }
 
+        if (password === '') {
+            contrasennaError.innerText = 'El campo contraseña es obligatorio';
+            valid = false;
+        }
+
+        if (valid) {
+            this.submit();
+        }
+    });
+
+    // Mostrar/Ocultar contraseña
+    document.getElementById('show-password').addEventListener('change', function() {
+        let passwordField = document.getElementById('password');
+        passwordField.type = this.checked ? 'text' : 'password';
+    });
 </script>
+
 
 {% endblock %}

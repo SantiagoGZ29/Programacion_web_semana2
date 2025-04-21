@@ -15,27 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from miapp import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-    path('', views.inicio, name='inicio'),
     path('admin/', admin.site.urls),
-    path('categorias/', views.categorias, name='categorias'),
-    path('accion/', views.accion, name='accion'),
-    path('carrito/', views.carrito, name='carrito'),
-    path('deporte/', views.deporte, name='deporte'),
-    path('aventura/', views.aventura, name='aventura'),
-    path('terror/', views.terror, name='terror'),
-    path('estrategia/', views.estrategia, name='estrategia'),
-    path('login/', views.login, name='login'),
-    path('perfil/', views.perfil, name='perfil'),
-    path('recuperar_contraseña/', views.recuperar_contraseña, name='recuperar_contraseña'),
-    path('contraseña/', views.contraseña, name='contraseña'),
-    path('formulario/', views.formulario, name='formulario'),
-    path('adminlogin/', views.adminlogin, name='adminlogin'),
-    path('admininicio/', views.admininicio, name='admininicio'),
-    path('blog_forest/', views.blog_forest, name='blog_forest'),
-    path('blogs/', views.blogs, name='blogs'),
-    path('blog_forest2/', views.blog_forest2, name='blog_forest2'),
-]
+    path('', include('miapp.urls')),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
