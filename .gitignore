@@ -1,0 +1,34 @@
+# 🚫 Entorno virtual (NO subir librerías instaladas)
+env/
+
+# 🚫 Cachés y archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 🚫 Configuraciones locales o temporales
+*.env
+*.log
+*.sqlite3
+*.db
+
+# 🚫 Archivos y carpetas de IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# 🚫 Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# 🛡️ Oracle Wallet y credenciales
+wallet*/
+*.zip
+*.pem
+*.json
+*.p12
+
+# 🚫 Migraciones (opcional)
+# tu_app/migrations/
+# level_ul/migrations/

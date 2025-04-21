@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <h1>Trivia de Videojuegos</h1>
+    <ul>
+      {% for pregunta in preguntas %}
+        <li class="mb-4">
+          <strong>{{ pregunta.question|safe }}</strong><br>
+          <em>Respuesta correcta:</em> {{ pregunta.correct_answer }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

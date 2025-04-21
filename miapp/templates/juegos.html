@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Catálogo de Juegos</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for juego in juegos %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        {% if juego.imagen %}
+        <img src="{{ juego.imagen.url }}" class="card-img-top" alt="{{ juego.nombre }}" style="width: 100%; height: 375px; object-fit: cover; aspect-ratio: 4/5;">
+        {% else %}
+        <img src="{% static 'img/no-image.jpg' %}" class="card-img-top" alt="Sin imagen" style="width: 100%; height: 375px; object-fit: cover; aspect-ratio: 4/5;">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ juego.nombre }}</h5>
+          <p class="card-text"><strong>Categoría:</strong> {{ juego.categoria.categoria }}</p>
+          <p class="card-text">{{ juego.descripcion|truncatechars:100 }}</p>
+        </div>
+        <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+          <p class="fw-bold text-success mb-0">$ {{ juego.precio|floatformat:0|intcomma }}</p>
+          <form method="POST" action="{% url 'agregar_al_carrito' juego.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-primary">
+              <i class="bi bi-cart-plus-fill"></i> Agregar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+

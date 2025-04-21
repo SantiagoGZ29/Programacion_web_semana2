@@ -12,71 +12,120 @@
 </head>
 
 <body>
-  <header>
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+  <!-- Header -->
+<header>
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src="{% static 'img/logo.png' %}" width="50px" alt="">
-          <strong>Level Up Store</strong>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-  
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-  
-            <!-- Inicio -->
-            <li class="nav-item">
-              <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
-                 aria-current="page" href="{% url 'inicio' %}">
-                <img src="{% static 'img/home.png' %}" width="25px" alt="">
-                <span>Inicio</span>
-              </a>
-            </li>
-  
-            <!-- Categorías -->
-            <li class="nav-item">
-              <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
-                 href="{% url 'categorias' %}">
-                <img src="{% static 'img/categoria.png' %}" width="25px" alt="">
-                <span>Categorías</span>
-              </a>
-            </li>
+          <a class="navbar-brand" href="#">
+              <img src="{% static 'img/logo.png' %}" width="50px" alt="">
+              <strong>Level Up Store</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
 
-            <li class="nav-item">
-              <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
-                 href="{% url 'blogs' %}">
-                <img src="{% static 'img/blog.png' %}" width="25px" alt="">
-                <span>Blogs</span>
-              </a>
-            </li>
-          </ul>
-  
-          <!-- Carrito + Login alineados a la derecha -->
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
-                 href="{% url 'carrito' %}">
-                <img src="{% static 'img/carrito.png' %}" width="25px" alt="">
-                <span>Carrito</span>
-              </a>
-            </li>
-  
-            <li class="nav-item">
-              <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
-                 href="{% url 'login' %}">
-                <img src="{% static 'img/login.png' %}" width="25px" alt="">
-                <span>Iniciar sesión</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                  <!-- Inicio -->
+                  <li class="nav-item">
+                      <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
+                         aria-current="page" href="{% url 'inicio' %}">
+                          <img src="{% static 'img/home.png' %}" width="25px" alt="">
+                          <span>Inicio</span>
+                      </a>
+                  </li>
+
+                  <!-- Categorías -->
+                  <li class="nav-item">
+                      <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
+                         href="{% url 'categorias' %}">
+                          <img src="{% static 'img/categoria.png' %}" width="25px" alt="">
+                          <span>Categorías</span>
+                      </a>
+                  </li>
+
+                  <!-- Categorías -->
+                  <li class="nav-item">
+                      <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
+                         href="{% url 'juegos' %}">
+                          <img src="{% static 'img/juegos.png' %}" width="25px" alt="">
+                          <span>Juegos</span>
+                      </a>
+                  </li>
+
+                  <!-- trivia API -->
+                  <li class="nav-item">
+                      <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
+                         href="{% url 'trivia' %}">
+                          <img src="{% static 'img/trivia.png' %}" width="25px" alt="">
+                          <span>Trivia</span>
+                      </a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
+                         href="{% url 'blogs' %}">
+                          <img src="{% static 'img/blog.png' %}" width="25px" alt="">
+                          <span>Blogs</span>
+                      </a>
+                  </li>
+              </ul>
+
+              <!-- Carrito + Login alineados a la derecha -->
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                      <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
+                         href="{% url 'carrito' %}">
+                          <img src="{% static 'img/carrito.png' %}" width="25px" alt="">
+                          <span>Carrito</span>
+                      </a>
+                  </li>
+
+                  {% if 'usuario_nombre' in request.session %}
+                      <!-- Si el usuario está logueado, muestra su nombre -->
+                      <li class="nav-item">
+                          <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
+                             href="{% url 'perfil' %}">
+                              <img src="{% static 'img/user.png' %}" width="25px" alt="">
+                              <span>{{ request.session.usuario_nombre }}</span>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
+                             href="{% url 'logout' %}">
+                              <img src="{% static 'img/logout.png' %}" width="25px" alt="">
+                              <span>Cerrar sesión</span>
+                          </a>
+                      </li>
+                  {% else %}
+                      <!-- Si el usuario no está logueado, muestra el botón de login -->
+                      <li class="nav-item">
+                          <a class="nav-link active d-flex flex-column align-items-center text-center gap-1" 
+                             href="{% url 'login' %}">
+                              <img src="{% static 'img/login.png' %}" width="25px" alt="">
+                              <span>Iniciar sesión</span>
+                          </a>
+                      </li>
+                  {% endif %}
+              </ul>
+          </div>
       </div>
-    </nav>
-  </header>
+  </nav>
+</header>
+
+
   
+{% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
 
     {% block content %}
     {% endblock %}
@@ -101,7 +150,7 @@
             <h6 class="text-uppercase fw-bold text-white">Comprar</h6>
             <ul class="list-unstyled small">
               <li><a href="#" class="footer-link">Cómo comprar</a></li>
-              <li><a href="#" class="footer-link">Juegos</a></li>
+              <li><a href="{% url 'juegos' %}" class="footer-link">Juegos</a></li>
             </ul>
           </div>
     
@@ -165,3 +214,4 @@
 
 
 </html>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
