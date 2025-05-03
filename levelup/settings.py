@@ -51,7 +51,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'miapp.apps.MiappConfig', 
     'widget_tweaks',
+<<<<<<< HEAD
+    'django.contrib.humanize',
+    'rest_framework',
+    'rest_framework.authtoken',
+=======
     'django.contrib.humanize', 
+>>>>>>> f0cd675784e5160cbf306c487076739029ed7e4e
 ]
 
 MIDDLEWARE = [
@@ -110,6 +116,12 @@ DATABASES = {
             'wallet_location': r'C:\Wallet_UIIEHPBLLEXUEQWV',
         },
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
 }
 
 

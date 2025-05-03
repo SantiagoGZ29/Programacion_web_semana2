@@ -12,6 +12,17 @@ from .forms import JuegoForm
 from django.views.decorators.csrf import csrf_exempt
 from .decoradores import usuario_logueado_requerido, admin_requerido
 import requests
+<<<<<<< HEAD
+from django.http import JsonResponse
+from .serializers import JuegoSerializer, NombreRegionSerializer
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+
+from rest_framework.response import Response
+
+=======
+>>>>>>> f0cd675784e5160cbf306c487076739029ed7e4e
 
 
 
@@ -360,6 +371,8 @@ def editar_juego(request, juego_id):
 
     return redirect('admininicio')
 
+<<<<<<< HEAD
+=======
 
 def trivia_videojuegos(request):
     url = 'https://opentdb.com/api.php?amount=10&category=15'
@@ -368,6 +381,7 @@ def trivia_videojuegos(request):
     preguntas = data['results']
     return render(request, 'trivia.html', {'preguntas': preguntas})
 
+>>>>>>> f0cd675784e5160cbf306c487076739029ed7e4e
 def contraseña(request):
     if request.method == 'POST':
         correo = request.POST.get('correo')
@@ -391,4 +405,46 @@ def contraseña(request):
         except Usuario.DoesNotExist:
             messages.error(request, 'El correo no está registrado.')
 
+<<<<<<< HEAD
     return render(request, 'contraseña.html')
+
+#API CheapShark 
+def buscar_juegos(request):
+    query = request.GET.get('query', '')  
+    juegos = []
+
+    if query:
+        url = f'https://www.cheapshark.com/api/1.0/games?title={query}'
+        response = requests.get(url)
+        if response.status_code == 200:
+            juegos = response.json() 
+
+    return render(request, 'buscar_juegos.html', {'juegos': juegos, 'query': query})
+
+#Trivia API
+def trivia_videojuegos(request):
+    url = 'https://opentdb.com/api.php?amount=10&category=15'
+    response = requests.get(url)
+    data = response.json()
+    preguntas = data['results']
+    return render(request, 'trivia.html', {'preguntas': preguntas})
+
+# Crear APIS
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def api_juegos(request):
+    juegos = Juego.objects.all()
+    serializer = JuegoSerializer(juegos, many=True) 
+    return Response(serializer.data)  
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def api_nombre_region(request):
+    regiones = NombreRegion.objects.all()
+    serializer = NombreRegionSerializer(regiones, many=True) 
+    return Response(serializer.data)
+=======
+    return render(request, 'contraseña.html')
+>>>>>>> f0cd675784e5160cbf306c487076739029ed7e4e
