@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Buscar juegos en oferta💸</h1>
+    <form method="get" class="d-flex justify-content-center mb-4">
+        <div class="input-group" style="max-width: 500px;">
+            <input type="text" name="query" class="form-control" placeholder="Buscar juegos..." value="{{ query }}">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </form>
+
+    {% if juegos %}
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for juego in juegos %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ juego.thumb }}" class="card-img-top" alt="{{ juego.external }}" style="height: 100px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ juego.external }}</h5>
+                    <p class="card-text"><strong>Precio:</strong> ${{ juego.cheapest }}</p>
+                    <a href="https://www.cheapshark.com/redirect?dealID={{ juego.cheapestDealID }}" 
+                       class="btn btn-sm btn-primary" target="_blank">Ver oferta</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center text-muted">No se encontraron juegos. Intenta con otro término de búsqueda.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

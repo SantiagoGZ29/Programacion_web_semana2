@@ -2,29 +2,81 @@
 {% load static %}
 
 {% block content %}
-
-<div class="container mt-5">
-    <div class="card shadow-lg p-3">
-        <div class="row g-3 align-items-center">
-            <!-- Imagen de perfil -->
-            <div class="col-md-4 text-center">
-                <img src="{% static 'img/iconperfil.png' %}" alt="Perfil" class="rounded-circle img-thumbnail" style="width: 120px; height: 120px;">
-                <input type="file" class="form-control mt-2" accept="image/*">
-            </div>
-            <!-- Información del usuario -->
-            <div class="col-md-8">
-                <h3 class="mb-3">Nombre del Usuario</h3>
-                <p><strong>Email:</strong> usuario@email.com</p>
-                <p><strong>Teléfono:</strong> +123456789</p>
-                <p><strong>Fecha de nacimiento:</strong> 01/01/2000</p>
-                <p><strong>Dirección:</strong> Ciudad, País</p>
-                <button class="btn btn-primary mt-2">Editar Perfil</button>
-                <a href="{% url 'inicio' %}"><button class="btn btn-danger mt-2">Cerrar Sesión</button></a>
-            </div>
-        </div>
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow-lg rounded-4 p-4" style="max-width: 800px; width: 100%; background-color: #f8f9fa;">
+    
+    <!-- Header -->
+    <div class="text-center mb-4">
+      <img src="{% static 'img/iconperfil.png' %}" class="rounded-circle border border-3 shadow-sm" style="width: 120px; height: 120px;" alt="Foto de perfil">
+      <h2 class="mt-3 mb-0">{{ usuario.nombre }}</h2>
+      <span class="badge bg-primary text-light px-3 py-2 mt-2" style="font-size: 0.9rem;">
+        {{ usuario.rol.rol_usuario }}
+      </span>
     </div>
+
+    <hr class="my-4">
+
+    <!-- Datos personales -->
+    <div class="row g-4">
+      <div class="col-md-6">
+        <p><i class="bi bi-envelope-fill text-primary me-2"></i><strong>Correo:</strong> {{ usuario.correo }}</p>
+        <p><i class="bi bi-person-fill text-primary me-2"></i><strong>Usuario:</strong> {{ usuario.usuario }}</p>
+        <p><i class="bi bi-calendar-event-fill text-primary me-2"></i><strong>Fecha de nacimiento:</strong> {{ usuario.fecha_nacimiento }}</p>
+        <p><i class="bi bi-gender-ambiguous text-primary me-2"></i><strong>Género:</strong> {{ usuario.genero.genero_usuario }}</p>
+      </div>
+      <div class="col-md-6">
+        <p><i class="bi bi-house-door-fill text-primary me-2"></i><strong>Dirección:</strong> {{ usuario.direccion }}</p>
+        <p><i class="bi bi-globe-americas text-primary me-2"></i><strong>Región:</strong> {{ usuario.region.nombre_region }}</p>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="text-center mt-5 d-flex justify-content-around flex-wrap gap-3">
+      <a href="{% url 'logout' %}" class="btn btn-outline-danger px-4">
+        <i class="bi bi-box-arrow-right me-1"></i> Cerrar Sesión
+      </a>
+      <button class="btn btn-outline-primary px-4" data-bs-toggle="collapse" data-bs-target="#formulario-edicion">
+        <i class="bi bi-pencil-fill me-1"></i> Editar Perfil
+      </button>
+      <button class="btn btn-outline-warning px-4" data-bs-toggle="collapse" data-bs-target="#formulario-contrasena">
+        <i class="bi bi-key-fill me-1"></i> Cambiar Contraseña
+      </button>
+      {% if es_administrador %}
+      <div class="text-center mt-4">
+        <a href="{% url 'admininicio' %}" class="btn btn-outline-success px-4 py-2">
+          <i class="bi bi-shield-lock me-2"></i> Panel de Administración
+        </a>
+      </div>
+    {% endif %}
+    </div>
+
+    <!-- Formulario: Editar Perfil -->
+    <div class="collapse mt-4" id="formulario-edicion">
+      <div class="card card-body bg-light border border-primary-subtle">
+        <h5 class="text-primary mb-3"><i class="bi bi-pencil-square me-1"></i>Editar Datos del Perfil</h5>
+        <form method="post">
+          {% csrf_token %}
+          {{ perfil_form.as_p }}
+          <button type="submit" name="guardar_perfil" class="btn btn-success mt-3">Guardar cambios</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Formulario: Cambiar Contraseña -->
+    <div class="collapse mt-4" id="formulario-contrasena">
+      <div class="card card-body bg-light border border-warning-subtle">
+        <h5 class="text-warning mb-3"><i class="bi bi-lock-fill me-1"></i>Cambiar Contraseña</h5>
+        <form method="post">
+          {% csrf_token %}
+          {{ contrasena_form.as_p }}
+          <button type="submit" name="cambiar_contrasena" class="btn btn-danger mt-3">Cambiar Contraseña</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>   
-
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 {% endblock %}

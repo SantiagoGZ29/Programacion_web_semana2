@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h1 class="mb-4">Trivia de Videojuegos</h1>
+  <ul class="list-group">
+    {% for pregunta in preguntas %}
+      <li class="list-group-item mb-3">
+        <strong>{{ pregunta.question|safe }}</strong><br>
+
+        <button class="btn btn-sm btn-outline-primary mt-2" type="button" onclick="mostrarRespuesta('{{ forloop.counter }}')">
+          Mostrar respuesta
+        </button>
+
+        <div id="respuesta-{{ forloop.counter }}" class="mt-2" style="display: none;">
+          <em>Respuesta correcta:</em> {{ pregunta.correct_answer }}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script>
+  function mostrarRespuesta(id) {
+    const div = document.getElementById('respuesta-' + id);
+    if (div.style.display === 'none') {
+      div.style.display = 'block';
+    } else {
+      div.style.display = 'none';
+    }
+  }
+</script>
+{% endblock %}
+

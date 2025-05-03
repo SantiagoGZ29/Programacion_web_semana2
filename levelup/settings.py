@@ -11,6 +11,18 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from pathlib import Path
+from django.contrib.messages import constants as messages
+
+import oracledb
+import platform
+
+if platform.system() == "Windows":
+    oracledb.init_oracle_client(
+        lib_dir=r"C:\instantclient_23_7"
+    )
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +49,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'miapp',
+    'miapp.apps.MiappConfig', 
+    'widget_tweaks',
+    'django.contrib.humanize',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -73,11 +89,35 @@ WSGI_APPLICATION = 'levelup.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.oracle',
+        #'NAME': 'localhost:1522/FREEPDB1',
+        #'USER': 'system',
+        #'PASSWORD': 'Ora123456789',
+    #}
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'uiiehpbllexueqwv_high',  # nombre del servicio (según tnsnames.ora)
+        'USER': 'levelup',
+        'PASSWORD': 'App123456789',
+        'HOST': '',
+        'PORT': '',
+        'OPTIONS': {
+            'config_dir': r'C:\Wallet_UIIEHPBLLEXUEQWV',
+            'wallet_location': r'C:\Wallet_UIIEHPBLLEXUEQWV',
+        },
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
 }
 
 
@@ -124,3 +164,11 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
+
+MEDIA_URL = '/media/'  # Ruta accesible desde la web
+MEDIA_ROOT = os.path.join(BASE_DIR,'media') 
+LOGIN_URL = '/login/'  # URL de la vista de login
