@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<<<<<<< HEAD
 <div class="container mt-5">
   <h1 class="mb-4">Trivia de Videojuegos</h1>
   <ul class="list-group">
@@ -31,3 +32,17 @@
 </script>
 {% endblock %}
 
+=======
+  <div class="container">
+    <h1>Trivia de Videojuegos</h1>
+    <ul>
+      {% for pregunta in preguntas %}
+        <li class="mb-4">
+          <strong>{{ pregunta.question|safe }}</strong><br>
+          <em>Respuesta correcta:</em> {{ pregunta.correct_answer }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
+>>>>>>> f0cd675784e5160cbf306c487076739029ed7e4e

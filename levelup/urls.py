@@ -23,6 +23,9 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('miapp.urls')),
+<<<<<<< HEAD
     path('api/', include('miapp.urls')),  # Include the API URLs
+=======
+>>>>>>> f0cd675784e5160cbf306c487076739029ed7e4e
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

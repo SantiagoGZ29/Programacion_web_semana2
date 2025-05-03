@@ -1,6 +1,9 @@
 from django.urls import path
 from miapp import views
+<<<<<<< HEAD
 from rest_framework.authtoken.views import obtain_auth_token
+=======
+>>>>>>> f0cd675784e5160cbf306c487076739029ed7e4e
 
 
 urlpatterns = [
@@ -29,6 +32,7 @@ urlpatterns = [
     path('eliminar_juego/<int:juego_id>/', views.eliminar_juego, name='eliminar_juego'),
     path('editar_juego/<int:juego_id>/', views.editar_juego, name='editar_juego'),
     path('trivia/', views.trivia_videojuegos, name='trivia'),
+<<<<<<< HEAD
     path('buscar-juegos/', views.buscar_juegos, name='buscar_juegos'),
 
     # path de API 
@@ -38,4 +42,6 @@ urlpatterns = [
     path('api/token/', obtain_auth_token, name='api_token_auth'),
 
 
+=======
+>>>>>>> f0cd675784e5160cbf306c487076739029ed7e4e
 ]
